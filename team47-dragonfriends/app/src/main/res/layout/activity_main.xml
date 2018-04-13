@@ -57,6 +57,11 @@
             android:layout_height="wrap_content"
             android:text="Already Registered? Sign in here"
             android:textAlignment="center" />
+        <Button
+            android:id="@+id/buttonSearch"
+            android:text="Search Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 

@@ -1,5 +1,6 @@
 package com.drexel.team47.dragonfriends;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -35,8 +36,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private EditText editTextName;
     private TextView textViewSignup;
     private TextView textViewSignin;
+
+    private Button buttonSearch;
+
+
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase database;
+
 
 
 
@@ -55,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         buttonRegister = (Button) findViewById(R.id.buttonRegister);
+        buttonSearch = (Button) findViewById(R.id.buttonSearch);
 
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
@@ -63,8 +70,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         textViewSignin = (TextView) findViewById(R.id.textViewSignin);
 
+        buttonSearch.setOnClickListener(this);
         buttonRegister.setOnClickListener(this);
         textViewSignin.setOnClickListener(this);
+
 
     }
 
@@ -80,6 +89,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return;
 
 
+        }
+
+        if (email.indexOf("drexel.edu")==-1){
+            Toast.makeText(this,"Please enter a Drexel email",Toast.LENGTH_SHORT).show();
+            return;
         }
 
         if(TextUtils.isEmpty(password)){
@@ -132,12 +146,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         }
 
+        //How to redirect to a different activity
+        if (view == buttonSearch){
+            startActivity(new Intent(MainActivity.this, SearchActivity.class));
+        }
+
     }
     public void onStart(){
         super.onStart();
 //        FirebaseUser currentUser = mAuth.getCurrentUser();
 //        updateUI(currentUser);
     }
+
+
 
 
 

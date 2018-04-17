@@ -18,13 +18,21 @@ app.get('/', function (request, response) {
 
 app.post('/classByCrn', function (request, response) {
   var crn = request.body.crn
+  console.log('crn', crn)
   var course = queryByCrn(crn)
-  console.log('course', course)
-  // // response.send(res)
-  // response.send(course)
-  response.send(course)
-
-  // console.log('request body', request.body)
+  course.then(function (doc) {
+    if (!doc.exists) {
+      console.log('No such document!')
+      response.send(null)
+    } else {
+      console.log('Document data:', doc.data())
+      response.send(doc.data())
+    }
+  })
+    .catch(err => {
+      console.log('Error getting the class', err)
+      response.send(null)
+    })
 })
 
 app.listen(app.get('port'), function () {
@@ -49,17 +57,18 @@ var db = admin.firestore()
 function queryByCrn (crn) {
   var courseRef = db.collection('quarter').doc('spring1718').collection('courses').doc(crn)
   // var courseQuery = courseRef.where('crn', '==', '30040')
-  return courseRef.get().then(doc => {
-    if (!doc.exists) {
-      console.log('No such document!')
-      return false
-    } else {
-      console.log('Document data:', doc.data())
-      return doc.data()
-    }
-  })
-  .catch(err => {
-    console.log('Error getting the class', err)
-    return false
-  })
+  return courseRef.get()
+  // Promise.all([coursePromise]).then(function (res) {
+  //   var doc = res[0]
+  //   if (!doc.exists) {
+  //     console.log('No such document!')
+  //     return `No such document`
+  //   } else {
+  //     console.log('Document data:', doc.data())
+  //     return doc.data()
+  //   }
+  // }).catch(err => {
+  //   console.log('Error getting the class', err)
+  //   return `Cannot find document`
+  // })
 }

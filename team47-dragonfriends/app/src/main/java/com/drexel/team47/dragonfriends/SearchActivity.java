@@ -27,6 +27,8 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         classSearch = (SearchView) findViewById(R.id.classSearchView);
+
+        //Listen to query text
         classSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
@@ -38,17 +40,19 @@ public class SearchActivity extends AppCompatActivity {
                 //Add parameters for POST request
                 RequestParams params = new RequestParams("crn", s);
                 System.out.println("logging");
+                String url = "https://risum.serveo.net/classByCrn";
 
-                client.post("http://pactus.serveo.net/classByCrn", params, new AsyncHttpResponseHandler() {
+                client.post(url, params, new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                         System.out.println("Successssss");
                         try {
-                            String decodedRes;
-                            decodedRes = new String(responseBody, "UTF-8");
-                            System.out.println(decodedRes);
 
-                        } catch (UnsupportedEncodingException e) {
+                            JSONObject res= new JSONObject(new String(responseBody));
+                            System.out.println(res);
+
+
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
 

@@ -143,7 +143,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         if(view == textViewSignin){
-
+            startActivity(new Intent(MainActivity.this, LoginActivity.class));
         }
 
         //How to redirect to a different activity

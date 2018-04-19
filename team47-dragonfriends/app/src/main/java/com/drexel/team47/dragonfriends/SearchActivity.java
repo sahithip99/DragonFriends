@@ -38,9 +38,10 @@ public class SearchActivity extends AppCompatActivity {
                 AsyncHttpClient client = new AsyncHttpClient();
 
                 //Add parameters for POST request
-                RequestParams params = new RequestParams("crn", s);
+                RequestParams params = new RequestParams("crn", s); //create a key value pair of 'crn': s
                 System.out.println("logging");
-                String url = "https://risum.serveo.net/classByCrn";
+                String url = "https://dragonfriends-eb4fc.firebaseapp.com/classByCrn";
+                System.out.println("url" + url);
 
                 client.post(url, params, new AsyncHttpResponseHandler() {
                     @Override

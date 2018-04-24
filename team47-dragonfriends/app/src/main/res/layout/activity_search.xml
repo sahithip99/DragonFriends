@@ -23,7 +23,7 @@
         android:id="@+id/class_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/classSearchView"
+        android:layout_above="@+id/label_1"
         android:layout_centerHorizontal="true"
         android:text="Class Name"
         android:textColor="@android:color/black"
@@ -33,31 +33,28 @@
         android:id="@+id/instr_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="250dp"
-        android:layout_marginTop="125dp"
+        android:layout_above="@+id/label_2"
+        android:layout_centerHorizontal="true"
         android:text="instrType"
-        android:textSize="18sp"
-        tools:textColor="@color/cardview_dark_background" />
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/crn_num"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/label_"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="125dp"
         android:text="CRN"
-        android:textSize="18sp"
-        tools:textColor="@color/cardview_dark_background" />
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/sec_num"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="125dp"
+        android:layout_above="@+id/label_4"
+        android:layout_centerHorizontal="true"
         android:text="SecNum"
-        android:textSize="18sp"
-        tools:textColor="@color/cardview_dark_background" />
+        android:textSize="18sp" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/add_class"
@@ -78,8 +75,8 @@
         android:id="@+id/label_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="175dp"
-        android:layout_marginTop="105dp"
+        android:layout_above="@+id/crn_num"
+        android:layout_centerHorizontal="true"
         android:text="CRN:"
         android:textColor="@color/cardview_dark_background"
         android:textSize="18sp" />
@@ -88,8 +85,8 @@
         android:id="@+id/label_"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="250dp"
-        android:layout_marginTop="105dp"
+        android:layout_above="@+id/instr_type"
+        android:layout_centerHorizontal="true"
         android:text="Class Type:"
         android:textColor="@color/cardview_dark_background"
         android:textSize="18sp" />
@@ -98,9 +95,8 @@
         android:id="@+id/label_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="false"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="105dp"
+        android:layout_above="@+id/sec_num"
+        android:layout_centerHorizontal="true"
         android:text="Section:"
         android:textColor="@color/cardview_dark_background"
         android:textSize="18sp" />
@@ -111,9 +107,6 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/instr_name"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="-200dp"
-        android:layout_marginLeft="25dp"
-        android:layout_marginTop="180dp"
         android:text="Instructor:"
         android:textColor="@color/cardview_dark_background"
         android:textSize="18sp" />
@@ -122,18 +115,17 @@
         android:id="@+id/instr_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_above="@+id/label_5"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="196dp"
         android:text="Instruc"
-        android:textColor="@color/cardview_dark_background"
         android:textSize="18sp" />
 
     <TextView
         android:id="@+id/label_5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_above="@+id/day_time"
+        android:layout_centerHorizontal="true"
         android:text="Day and Time:"
         android:textColor="@color/cardview_dark_background"
         android:textSize="18sp" />
@@ -142,10 +134,10 @@
         android:id="@+id/day_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/label_5"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="136dp"
         android:text="daytime"
-        android:textColor="@color/cardview_dark_background"
         android:textSize="18sp" />
 
 </RelativeLayout>

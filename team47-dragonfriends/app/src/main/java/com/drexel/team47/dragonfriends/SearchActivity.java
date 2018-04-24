@@ -76,10 +76,9 @@ public class SearchActivity extends AppCompatActivity {
                 RequestParams params = new RequestParams("crn", s); //create a key value pair of 'crn': s
                 System.out.println("logging");
                 String url = "https://dragonfriends-eb4fc.firebaseapp.com/classByCrn";
-<<<<<<< HEAD
-=======
+
                 System.out.println("url" + url);
->>>>>>> 8774a7a301e7e610dca50a22761701d20356c38c
+
 
                 client.post(url, params, new AsyncHttpResponseHandler() {
                     @Override

@@ -83,7 +83,7 @@ public class SearchActivity extends AppCompatActivity {
                         val += curr;
                         userRef.setValue(val);
                     }
-            
+
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
 

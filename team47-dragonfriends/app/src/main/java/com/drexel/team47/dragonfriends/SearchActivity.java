@@ -7,9 +7,16 @@ import android.util.Log;
 import android.view.View;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 //import com.google.auth.oauth2.GoogleCredentials;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.loopj.android.http.*;
 
 import org.json.JSONArray;
@@ -20,6 +27,7 @@ import org.w3c.dom.Text;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 import java.util.Dictionary;
+import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -32,8 +40,12 @@ public class SearchActivity extends AppCompatActivity {
     private TextView instructor;
     private TextView dayTime;
 
+    private FirebaseAuth firebaseAuth;
+    private FirebaseDatabase database;
 
     private FloatingActionButton addClass;
+
+    private String classInfo;
 
     private SearchView classSearch;
 
@@ -52,12 +64,33 @@ public class SearchActivity extends AppCompatActivity {
         instructor = (TextView) findViewById(R.id.instr_name);
         dayTime = (TextView) findViewById(R.id.day_time);
 
+        database = database.getInstance();
+        firebaseAuth = firebaseAuth.getInstance();
+
         addClass = (FloatingActionButton) findViewById(R.id.add_class);
 
         addClass.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
                 System.out.println("Added class " + res);
                 //replace with the backend function to add the class to the user's info in database
+                //final String uid = firebaseAuth.getCurrentUser().getUid();
+                final DatabaseReference userRef = database.getReference("users").child("6akoFYTXFdTOTgeWzdAIufPYIQU2").child("classes");
+                userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        String val = classInfo + ",";
+                        String curr = dataSnapshot.getValue(String.class);
+                        val += curr;
+                        userRef.setValue(val);
+                    }
+            
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
+                Toast.makeText(SearchActivity.this, "Added Class", Toast.LENGTH_SHORT).show();
             }
 
 
@@ -134,6 +167,7 @@ public class SearchActivity extends AppCompatActivity {
             String classT = info.getString("instrType");
             String instr = info.getString("instructor");
             String dayT = info.getString("dayTime");
+            classInfo = crnN;
             className.setText(name);
             secNum.setText(sec);
             crnNum.setText(crnN);

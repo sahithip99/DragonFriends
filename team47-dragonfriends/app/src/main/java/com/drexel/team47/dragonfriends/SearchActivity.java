@@ -75,6 +75,7 @@ public class SearchActivity extends AppCompatActivity {
                 //replace with the backend function to add the class to the user's info in database
                 //final String uid = firebaseAuth.getCurrentUser().getUid();
                 final DatabaseReference userRef = database.getReference("users").child("6akoFYTXFdTOTgeWzdAIufPYIQU2").child("classes");
+
                 userRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -133,6 +134,7 @@ public class SearchActivity extends AppCompatActivity {
                     public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                         System.out.println("Error getting class by crn");
                         Log.e("error", "get class by crn", error);
+                        Toast.makeText(SearchActivity.this,"Class not found. Please try another CRN.",Toast.LENGTH_SHORT).show();
                     }
                 });
 

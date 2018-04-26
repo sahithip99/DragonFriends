@@ -26,8 +26,8 @@ public class ProfileActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
 
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
@@ -39,7 +39,6 @@ public class ProfileActivity extends AppCompatActivity {
 //        });
         firebaseAuth = FirebaseAuth.getInstance();
 
-        buttonLogout = (Button) findViewById(R.id.buttonLogout);
     }
 
     private void userLogout(){
@@ -79,9 +78,5 @@ public class ProfileActivity extends AppCompatActivity {
         return true;
     }
 
-    public void onClick(View view) {
-        if (view == buttonLogout) {
-            userLogout();
-        }
-    }
+
 }

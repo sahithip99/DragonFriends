@@ -73,8 +73,8 @@ public class SearchActivity extends AppCompatActivity {
             public void onClick(View v){
                 System.out.println("Added class " + res);
                 //replace with the backend function to add the class to the user's info in database
-                //final String uid = firebaseAuth.getCurrentUser().getUid();
-                final DatabaseReference userRef = database.getReference("users").child("6akoFYTXFdTOTgeWzdAIufPYIQU2").child("classes");
+                final String uid = firebaseAuth.getCurrentUser().getUid();
+                final DatabaseReference userRef = database.getReference("users").child(uid).child("classes");
 
                 userRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override

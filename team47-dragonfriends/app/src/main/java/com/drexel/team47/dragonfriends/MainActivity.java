@@ -118,7 +118,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 put("email", email);
                                 put("name", name);
                                 put("uid", uid);
-                                put("classes", "");
                             }};
                             DatabaseReference userRef = database.getReference("users").child(uid);
                             userRef.setValue(userData);

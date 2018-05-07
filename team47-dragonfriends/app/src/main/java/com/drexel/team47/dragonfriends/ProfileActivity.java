@@ -11,6 +11,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -18,8 +19,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 
-public class ProfileActivity extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity implements View.OnClickListener{
     private Button buttonLogout;
+    private TextView userClassesText;
     private FirebaseAuth firebaseAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,9 @@ public class ProfileActivity extends AppCompatActivity {
 //            }
 //        });
         firebaseAuth = FirebaseAuth.getInstance();
+
+        userClassesText = (TextView) findViewById(R.id.userClasses);
+        userClassesText.setOnClickListener(this);
 
     }
 
@@ -72,10 +77,24 @@ public class ProfileActivity extends AppCompatActivity {
                 startActivity(new Intent(this, MainActivity.class));
 
 
-            break;
+                break;
         }
 
         return true;
+    }
+
+    @Override
+    public void onClick(View view){
+        if (view == userClassesText){
+            Intent intent = new Intent(ProfileActivity.this, RosterActivity.class);
+            //Redirect with parameters
+            Bundle b = new Bundle();
+            String crn = "30003";
+            b.putString("crn", crn);
+            intent.putExtras(b);
+            startActivity(intent);
+            finish();
+        }
     }
 
 

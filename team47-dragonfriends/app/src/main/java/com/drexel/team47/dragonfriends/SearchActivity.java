@@ -27,7 +27,9 @@ import org.w3c.dom.Text;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 import java.util.Dictionary;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -74,24 +76,32 @@ public class SearchActivity extends AppCompatActivity {
                 System.out.println("Added class " + res);
                 //replace with the backend function to add the class to the user's info in database
                 final String uid = firebaseAuth.getCurrentUser().getUid();
-                final DatabaseReference userRef = database.getReference("users").child(uid).child("classes");
+                try {
+                    AsyncHttpClient client2 = new AsyncHttpClient();
+                    RequestParams params2 = new RequestParams();
+                    System.out.println("UID:");
+                    System.out.println(firebaseAuth.getCurrentUser().getUid());
+                    params2.put("uid", firebaseAuth.getCurrentUser().getUid());
+                    params2.put("crn", res.getString("crn"));
+                    String url2 = "https://dragonfriends-eb4fc.firebaseapp.com/addUserToClass";
+                    client2.post(url2, params2, new AsyncHttpResponseHandler() {
+                        @Override
+                        public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                            System.out.println("Added user uid to class");
+                            Toast.makeText(SearchActivity.this, "Added Class", Toast.LENGTH_SHORT).show();
+                        }
 
-                userRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        String val = classInfo + ",";
-                        String curr = dataSnapshot.getValue(String.class);
-                        val += curr;
-                        userRef.setValue(val);
-                    }
+                        @Override
+                        public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                            System.out.println("Failed to add user uid to class");
+                            Toast.makeText(SearchActivity.this, "Failed to Add Class", Toast.LENGTH_SHORT).show();
+                        }
+                    });
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
 
-                    }
-                });
-
-                Toast.makeText(SearchActivity.this, "Added Class", Toast.LENGTH_SHORT).show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
 

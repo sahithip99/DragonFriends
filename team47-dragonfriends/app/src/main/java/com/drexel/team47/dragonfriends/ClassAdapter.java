@@ -16,8 +16,8 @@ import java.util.ArrayList;
  */
 
 public class ClassAdapter extends ArrayAdapter<ClassItem> {
-    public ClassAdapter(Context context, ArrayList<ClassItem> classItems) {
-        super(context, 0, classItems);
+    public ClassAdapter(Context context, int resource, ArrayList<ClassItem> classItems) {
+        super(context, resource, classItems);
     }
 
     @Override

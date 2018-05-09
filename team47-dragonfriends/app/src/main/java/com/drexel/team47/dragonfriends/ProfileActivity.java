@@ -20,7 +20,6 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-<<<<<<< HEAD
 import com.google.firebase.database.FirebaseDatabase;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -29,11 +28,9 @@ import com.loopj.android.http.RequestParams;
 import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
-=======
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
->>>>>>> 65cca16b178509cb9378de5f91b047559de15e54
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -48,11 +45,10 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private Button buttonLogout;
 
     private FirebaseAuth firebaseAuth;
-<<<<<<< HEAD
+
     private FirebaseDatabase database;
 
     private JSONObject res;
-=======
 
     JSONObject userInfo;
 
@@ -60,7 +56,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private TextView tvName;
     private TextView tvEmail;
     private TextView userClassesText;
->>>>>>> 65cca16b178509cb9378de5f91b047559de15e54
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,8 +77,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
         getUserInfo();
 
-        tvName = findViewById(R.id.tvFullName);
-        tvEmail = findViewById(R.id.tvEmail);
+        tvName = findViewById(R.id.name);
+        tvEmail = findViewById(R.id.email);
         buttonSearch = findViewById(R.id.buttonSearch);
         userClassesText = (TextView) findViewById(R.id.userClasses);
 
@@ -111,7 +106,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                     try {
                         userInfo = new JSONObject(new String(responseBody));
                         JSONObject classData = userInfo.getJSONObject("classes");
-                        System.out.println(classData);
+                        System.out.println("Classes:" + classData);
 
                         displayData(userInfo);
                         dialog.dismiss();
@@ -122,7 +117,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                         ArrayList<ClassItem> classList = generateClassItemList(classData);
                         System.out.println(classList);
 
-                        ClassAdapter classAdapter = new ClassAdapter(getApplicationContext(), classList);
+                        ClassAdapter classAdapter = new ClassAdapter(getApplicationContext(), R.layout.profile_list_layout, classList);
 
                         //Get the list view
                         ListView classListView = (ListView) findViewById(R.id.classListView);
@@ -185,7 +180,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         return true;
     }
 
-<<<<<<< HEAD
     private JSONObject cInfo(String crn) {
         AsyncHttpClient client = new AsyncHttpClient();
 
@@ -193,13 +187,39 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         RequestParams params = new RequestParams("crn", crn); //create a key value pair of 'crn': s
         System.out.println("logging");
         String url = "https://dragonfriends-eb4fc.firebaseapp.com/classByCrn";
-=======
+        System.out.println("url" + url);
+
+        client.post(url, params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+
+                try {
+
+                    res = new JSONObject(new String(responseBody));
+                    System.out.println(res);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                System.out.println("Error getting class by crn");
+                Log.e("error", "get class by crn", error);
+            }
+        });
+        return res;
+    }
+
+
     private void displayData(JSONObject info){
         try {
             String fullName = info.getString("name");
             String email = info.getString("email");
-            tvName.setText("Name: " + fullName);
-            tvEmail.setText("Email: " + email);
+            tvName.setText(fullName);
+            tvEmail.setText(email);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -252,31 +272,5 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
->>>>>>> 65cca16b178509cb9378de5f91b047559de15e54
 
-        System.out.println("url" + url);
-
-        client.post(url, params, new AsyncHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-
-                try {
-
-                    res = new JSONObject(new String(responseBody));
-                    System.out.println(res);
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                System.out.println("Error getting class by crn");
-                Log.e("error", "get class by crn", error);
-            }
-        });
-        return res;
-    }
 }

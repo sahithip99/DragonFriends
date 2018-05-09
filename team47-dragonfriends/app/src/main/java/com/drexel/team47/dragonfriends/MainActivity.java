@@ -113,6 +113,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         if(task.isSuccessful()){
                             //Upload user info to Realtime Database
                             Toast.makeText(MainActivity.this,"Registered Successfully",Toast.LENGTH_SHORT).show();
+                            final FirebaseUser user = firebaseAuth.getCurrentUser();
+
+                            user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    Toast.makeText(MainActivity.this,"Email Verification Sent",Toast.LENGTH_SHORT).show();
+                                }
+                            });
                             final String uid = firebaseAuth.getCurrentUser().getUid();
                             Map<String, Object> userData = new HashMap<String, Object>(){{
                                 put("email", email);

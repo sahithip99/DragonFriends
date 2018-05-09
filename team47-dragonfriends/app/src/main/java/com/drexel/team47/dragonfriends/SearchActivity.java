@@ -1,5 +1,6 @@
 package com.drexel.team47.dragonfriends;
 
+import android.app.ProgressDialog;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -123,6 +124,10 @@ public class SearchActivity extends AppCompatActivity {
 
                 System.out.println("url" + url);
 
+                final ProgressDialog dialog = new ProgressDialog(SearchActivity.this);
+                dialog.setMessage("Getting class data...");
+                dialog.show();
+
                 client.post(url, params, new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -132,9 +137,11 @@ public class SearchActivity extends AppCompatActivity {
                             res= new JSONObject(new String(responseBody));
                             System.out.println(res);
                             displayData(res);
+                            dialog.dismiss();
 
                         } catch (Exception e) {
                             e.printStackTrace();
+                            dialog.dismiss();
                         }
 
                     }
@@ -142,8 +149,10 @@ public class SearchActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                         System.out.println("Error getting class by crn");
+                        dialog.dismiss();
                         Log.e("error", "get class by crn", error);
                         Toast.makeText(SearchActivity.this,"Class not found. Please try another CRN.",Toast.LENGTH_SHORT).show();
+
                     }
                 });
 

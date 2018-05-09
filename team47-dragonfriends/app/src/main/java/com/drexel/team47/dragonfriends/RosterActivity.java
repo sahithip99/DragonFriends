@@ -58,7 +58,7 @@ public class RosterActivity extends AppCompatActivity {
             headerText.setText("Course CRN: " + crn);
         }
 
-        getRosterInfo("30003");
+        getRosterInfo(crn);
     }
 
     private void getRosterInfo(String crn){

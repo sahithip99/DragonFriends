@@ -57,7 +57,7 @@ app.post('/classByCrn', (request, response) => {
   course.then((doc) => {
     if (!doc.exists) {
       console.log('No such document!')
-      response.send(null)
+      response.status(500).send(null)
       return null
     } else {
       console.log('Document data:', doc.data())
@@ -67,7 +67,7 @@ app.post('/classByCrn', (request, response) => {
   })
     .catch(err => {
       console.log('Error getting the class', err)
-      response.send(null)
+      response.status(500).send(null)
       return null
     })
 })
@@ -150,10 +150,21 @@ app.post('/getRosterInfo', (request, response) => {
 //Return user profile 
 app.post('/getUserProfile', (request, response) => {
   var uid = request.body.uid
-  getUserProfile(uid).then(snap => {
+  var getUserProfilePromise = getUserProfile(uid)
+  var getClassDataPromise = getUserProfilePromise.then(snap => {
     if (snap.val()){
-      response.send(snap.val())
-      return true
+      var userClasses = snap.val().classes
+
+      getClassesPromise = []
+      for (var i in userClasses){
+        var crn = userClasses[i].crn
+        console.log("crn", crn)
+        var promise = queryByCrn(crn)
+        getClassesPromise.push(promise)
+      }
+
+      return Promise.all(getClassesPromise)
+      
     }
     else {
       response.status(500).send("User does not exist")
@@ -165,15 +176,33 @@ app.post('/getUserProfile', (request, response) => {
     console.log(err)
     response.status(500).send("Error getting user profile!")
   })
-  // var userRef = db.ref(`users/${uid}`)
-  // userRef.once("value", (snap) => {
-  //   response.send(snap.val())
-  // })
+
+  Promise.all([getUserProfilePromise, getClassDataPromise]).then(res => {
+    var userData = res[0].val()
+    console.log("userData", userData)
+    var classData = res[1]
+    console.log("class data", classData)
+    for (var i = 0; i<classData.length; i++){
+      var crn = classData[i].data().crn
+      console.log("Setting crn", crn)
+      userData["classes"][crn] = classData[i].data()
+    }
+    response.send(userData)
+    return true
+  })
+  .catch(err => {
+    console.log(err)
+    response.status(500).send("Error getting user profile")
+  })
+ 
 })
+
 
 function getUserProfile(uid){
   return db.ref(`users/${uid}`).once("value")
 }
+
+
 
 app.listen(3000, () => {
   console.log("Listening on port 3000");

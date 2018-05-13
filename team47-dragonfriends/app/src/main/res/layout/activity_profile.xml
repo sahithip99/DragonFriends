@@ -1,28 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
-    <!--xmlns:tools="http://schemas.android.com/tools"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:id="@+id/toolbar"-->
-    <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
-    <!--tools:context="com.drexel.team47.dragonfriends.ProfileActivity"-->
-    <!--tools:showIn="@layout/activity_profile">-->
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent" android:layout_height="match_parent">
-
+<!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--xmlns:tools="http://schemas.android.com/tools"-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:id="@+id/toolbar"-->
+<!--app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
+<!--tools:context="com.drexel.team47.dragonfriends.ProfileActivity"-->
+<!--tools:showIn="@layout/activity_profile">-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="match_parent">
 
 
     <TextView
-        android:id="@+id/fullName"
-        android:layout_width="84dp"
-        android:layout_height="33dp"
-        android:layout_alignParentStart="true"
+        android:id="@+id/tvFullName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/profileHeader"
-        android:layout_marginStart="28dp"
         android:layout_marginLeft="28dp"
-        android:text="Full Name:" />
+        android:layout_marginStart="28dp"
+        android:text="Name:"
+        android:textColor="@android:color/black" />
 
     <TextView
         android:id="@+id/profileHeader"
@@ -31,26 +32,66 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="12dp"
-        android:text="Profile" />
+        android:text="Profile"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tvEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tvFullName"
+        android:layout_alignStart="@+id/tvFullName"
+        android:layout_below="@+id/tvFullName"
+        android:layout_marginTop="26dp"
+        android:paddingRight="10dp"
+        android:text="Email:"
+        android:textColor="@android:color/black" />
+
+    <TextView
+        android:id="@+id/userClasses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/buttonSearch"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="50dp"
+        android:text="Your Classes"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/buttonSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvEmail"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="29dp"
+        android:text="Search for Classes" />
+
+    <ListView
+        android:id="@+id/classListView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/userClasses"
+        android:textColor="@android:color/black"/>
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/tvFullName"
+        android:layout_marginStart="80dp"
+        android:textColor="@color/cardview_dark_background" />
 
     <TextView
         android:id="@+id/email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/fullName"
-        android:layout_alignLeft="@+id/fullName"
-        android:layout_marginTop="119dp"
-        android:text="Email:" />
+        android:layout_alignTop="@+id/tvEmail"
+        android:layout_toEndOf="@+id/tvEmail"
+        android:textColor="@color/cardview_dark_background" />
 
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/fullName"
-        android:layout_alignLeft="@+id/fullName"
-        android:layout_marginTop="160dp"
-        android:text="TextView" />
-    </RelativeLayout>
-<!--</android.support.constraint.ConstraintLayout>-->
+</RelativeLayout>
+    <!--</android.support.constraint.ConstraintLayout>-->

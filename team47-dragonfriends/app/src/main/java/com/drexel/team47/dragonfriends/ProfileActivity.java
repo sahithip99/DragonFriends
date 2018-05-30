@@ -75,8 +75,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 //        });
         firebaseAuth = FirebaseAuth.getInstance();
 
-        getUserInfo();
-
         tvName = findViewById(R.id.name);
         tvEmail = findViewById(R.id.email);
         buttonSearch = findViewById(R.id.buttonSearch);
@@ -85,15 +83,27 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         userClassesText.setOnClickListener(this);
         buttonSearch.setOnClickListener(this);
 
+        String uid = "";
+
+        Bundle b = getIntent().getExtras();
+
+        if (b != null){
+            uid = b.getString("uid");
+            System.out.println("The uid>>>" + uid);
+            getUserInfo(uid);
+        } else {
+            getUserInfo(firebaseAuth.getCurrentUser().getUid());
+        }
+
 
 
     }
 
-    private void getUserInfo(){
+    private void getUserInfo(String uid){
         try {
             AsyncHttpClient client = new AsyncHttpClient();
             RequestParams params = new RequestParams();
-            params.put("uid", firebaseAuth.getCurrentUser().getUid());
+            params.put("uid", uid);
             String url = "https://dragonfriends-eb4fc.firebaseapp.com/getUserProfile";
 
             //Create progress dialog

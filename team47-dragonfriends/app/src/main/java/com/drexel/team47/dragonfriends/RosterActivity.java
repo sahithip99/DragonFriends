@@ -127,7 +127,8 @@ public class RosterActivity extends AppCompatActivity {
                     System.out.println("key" + key);
                     String studentName = ((JSONObject) uidData.get(key)).getString("name");
                     String studentEmail = ((JSONObject) uidData.get(key)).getString("email");
-                    RosterItem student = new RosterItem(studentName, studentEmail);
+                    String uid = key;
+                    RosterItem student = new RosterItem(studentName, studentEmail, uid);
 //                    System.out.println("Student" + student.toString());
 
                     rosterList.add(student);

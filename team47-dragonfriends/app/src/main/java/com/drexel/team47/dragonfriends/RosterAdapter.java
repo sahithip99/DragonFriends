@@ -1,6 +1,8 @@
 package com.drexel.team47.dragonfriends;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +23,7 @@ public class RosterAdapter extends ArrayAdapter<RosterItem> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // Get the data item for this position
-        RosterItem student = getItem(position);
+        final RosterItem student = getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.roster_list_layout, parent, false);
@@ -33,6 +35,20 @@ public class RosterAdapter extends ArrayAdapter<RosterItem> {
         tvName.setText("Name: " + student.getStudentName());
         tvEmail.setText("Email: " + student.getStudentEmail());
         // Return the completed view to render on screen
+        convertView.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                System.out.println(student.getUid());
+                Context context = getContext();
+                Intent intent = new Intent(context, ProfileActivity.class);
+                //Redirect with parameters
+                Bundle b = new Bundle();
+                String uid = student.getUid();
+                b.putString("uid", uid);
+                intent.putExtras(b);
+                context.startActivity(intent);
+            }
+        });
         return convertView;
     }
 }

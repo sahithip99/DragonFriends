@@ -7,11 +7,12 @@ package com.drexel.team47.dragonfriends;
 public class RosterItem {
     private String studentName;
     private String studentEmail;
-
-    public RosterItem(String name, String email){
+    private String uid;
+    public RosterItem(String name, String email, String uid){
         System.out.println("Setting roster item...");
         this.studentName = name;
         this.studentEmail = email;
+        this.uid = uid;
     }
 
     public String getStudentName(){
@@ -21,6 +22,8 @@ public class RosterItem {
     public String getStudentEmail() {
         return this.studentEmail;
     }
+
+    public String getUid() { return this.uid; }
 
     public String toString() {
         String str = "Name: " + this.studentName + "// Email: " + this.studentEmail;

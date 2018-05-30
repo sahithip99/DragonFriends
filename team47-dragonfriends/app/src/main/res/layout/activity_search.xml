@@ -11,6 +11,7 @@
     android:minWidth="1dp"
     tools:context="com.drexel.team47.dragonfriends.SearchActivity">
 
+
     <SearchView
         android:id="@+id/classSearchView"
         android:layout_width="match_parent"
@@ -23,7 +24,7 @@
 
     <TextView
         android:id="@+id/class_name"
-        android:layout_width="10dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/label_1"
         android:layout_centerHorizontal="true"

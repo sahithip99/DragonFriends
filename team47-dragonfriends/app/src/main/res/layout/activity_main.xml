@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
     tools:context="com.drexel.team47.dragonfriends.MainActivity">
 
     <LinearLayout
@@ -17,8 +18,8 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="211dp"
-            android:layout_height="148dp"
+            android:layout_width="384dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             app:srcCompat="@drawable/dragon_icon"
             tools:layout_editor_absoluteX="87dp"
@@ -29,7 +30,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Email"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:textSize="18sp" />
 
         <EditText
             android:id="@+id/editTextPassword"
@@ -47,24 +49,34 @@
 
         <Button
             android:id="@+id/buttonRegister"
+            android:layout_width="317dp"
+            android:layout_height="wrap_content"
+            android:background="@color/cardview_light_background"
+            android:text="Register User"
+            android:textColor="@color/cardview_dark_background"
+            android:layout_gravity="center_horizontal"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/textViewLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Register User" />
+            android:background="@android:color/transparent"
+            android:text="Already Registered?"
+            android:textAlignment="center"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/textViewSignin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Already Registered? Sign in here"
-            android:textAlignment="center" />
-        <Button
-            android:id="@+id/buttonSearch"
-            android:text="Search Button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:background="@android:color/transparent"
+            android:text="Sign In Here"
+            android:textAlignment="center"
+            android:textColor="?attr/colorControlActivated"
+            android:textSize="18sp" />
 
     </LinearLayout>
-
 
 
 </android.support.constraint.ConstraintLayout>
